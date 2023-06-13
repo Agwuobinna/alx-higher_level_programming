@@ -1,11 +1,7 @@
-Why Python programming is awesome
-What are sets and how to use them
-What are the most common methods of set and how to use them
-When to use sets versus lists
-How to iterate into a set
-What are dictionaries and how to use them
-When to use dictionaries versus lists or sets
-What is a key in a dictionary
-How to iterate over a dictionary
-What is a lambda function
-What are the map, reduce and filter functions
+General
+What is Unit testing and how to implement it in a large project
+How to serialize and deserialize a Class
+How to write and read a JSON file
+What is *args and how to use it
+What is **kwargs and how to use it
+How to handle named arguments in a function
