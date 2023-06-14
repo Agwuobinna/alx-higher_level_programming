@@ -1,6 +1,3 @@
-const $ = window.$;
-$(function () {
-  $('DIV#red_header').on('click', function (e) {
-    $('header').addClass('red');
-  });
+$('DIV#red_header').click(function () {
+  $('HEADER').addClass('red');
 });
