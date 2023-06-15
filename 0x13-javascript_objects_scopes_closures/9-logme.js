@@ -1,7 +1,8 @@
 #!/usr/bin/node
-let narg = 0;
+// prints the number of arguments already printed and the new argument value.
 
+let i = 0;
 exports.logMe = function (item) {
-  console.log(narg + ': ' + item);
-  narg++;
+  console.log(i + ': ' + item);
+  i++;
 };
