@@ -1,36 +1,18 @@
 #!/usr/bin/python3
-"""Executes a SELECT statement using MySQLdb module."""
+"""  lists all states from the database hbtn_0e_0_usa """
 import MySQLdb
 import sys
 
 
-def main():
-    """Entry point"""
-    DB_HOST = 'localhost'
-    DB_USER = sys.argv[1]
-    DB_PASSWD = sys.argv[2]
-    DB_NAME = sys.argv[3]
-    DB_PORT = 3306
-    SEARCH = sys.argv[4]
-
-    db = MySQLdb.connect(host=DB_HOST, user=DB_USER, passwd=DB_PASSWD,
-                         db=DB_NAME, port=DB_PORT)
+if __name__ == "__main__":
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
     cur = db.cursor()
-    sql = "SELECT cities.name FROM cities JOIN states ON\
-           states.id=cities.state_id WHERE states.name=%s\
-           ORDER BY cities.id ASC"
-    cur.execute(sql, (SEARCH, ))
+    cur.execute("""SELECT cities.name FROM
+                cities INNER JOIN states ON states.id=cities.state_id
+                WHERE states.name=%s""", (sys.argv[4],))
     rows = cur.fetchall()
-
-    i = 0
-    for row in rows:
-        if i != 0:
-            print(end=", ")
-        for col in row:
-            print(col, end="")
-        i += 1
-    print()
-
-
-if __name__ == '__main__':
-    main()
+    tmp = list(row[0] for row in rows)
+    print(*tmp, sep=", ")
+    cur.close()
+    db.close()

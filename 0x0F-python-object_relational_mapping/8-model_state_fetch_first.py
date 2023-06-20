@@ -1,29 +1,20 @@
 #!/usr/bin/python3
-"""Select all first states."""
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sys import argv
+""" prints the first State object from the database hbtn_0e_6_usa
+"""
+import sys
 from model_state import Base, State
+from sqlalchemy import (create_engine)
+from sqlalchemy.orm import sessionmaker
 
 
-def main():
-    """Selects all states."""
-    DB_USER = argv[1]
-    DB_PASS = argv[2]
-    DB_NAME = argv[3]
-
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}".
-                           format(DB_PASS, DB_USER, DB_NAME))
-    Session = sessionmaker()
-    session = Session(bind=engine)
-    state = session.query(State).first()
-
-    if state is not None:
-        print("{:d}: {}".format(state.id, state.name))
-    else:
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    instance = session.query(State).first()
+    if instance is None:
         print("Nothing")
-
-
-if __name__ == '__main__':
-    main()
+    else:
+        print(instance.id, instance.name, sep=": ")
